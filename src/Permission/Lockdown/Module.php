@@ -9,6 +9,7 @@ use MediaWiki\User\UserGroupManager;
 use Message;
 use MessageLocalizer;
 use User;
+use IDBAccessObject;
 
 abstract class Module implements IModule, MessageLocalizer {
 
@@ -106,7 +107,7 @@ abstract class Module implements IModule, MessageLocalizer {
 		}
 		$userGroupManager = $this->services->getUserGroupManager();
 		static::$userGroups[$user->getId()] = $userGroupManager
-			->getUserEffectiveGroups( $user, UserGroupManager::READ_NORMAL, true );
+			->getUserEffectiveGroups( $user, IDBAccessObject::READ_NORMAL, true );
 		return static::$userGroups[$user->getId()];
 	}
 
